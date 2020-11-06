@@ -419,8 +419,6 @@ Error message and password prompt
 
 <li>$:/plugins/tobibeer/random</li>
 
-<li>$:/plugins/tobibeer/setvars</li>
-
 <li>$:/plugins/TWaddle/LeftBar/temp</li>
 
 <li>$:/settings/OokTech/WordCount</li>
@@ -786,6 +784,8 @@ Error message and password prompt
 <li>Dorcasta Grimmhilden</li>
 
 <li>Dorian Sorensen</li>
+
+<li>Draft of 'El Férreo puño de la Razón' by Zerothlaw</li>
 
 <li>Dragón</li>
 
@@ -14648,22 +14648,6 @@ You can switch between viewing the gallery as a list of images or as one image a
     }
 }</pre>
 </div>
-<div author="Tobias Beer" bag="default" core-version="&gt;=5.1.9" dependents="" description="Set multiple, complex variables based on attributes, filters, or conditionals" documentation="https://tobibeer.github.io/tw5-setvars" list="readme" plugin-type="plugin" requires="" revision="0" source="https://github.com/tobibeer/tw5-setvars" title="$:/plugins/tobibeer/setvars" type="application/json" version="0.6.0">
-<pre>{
-    &quot;tiddlers&quot;: {
-        &quot;$:/plugins/tobibeer/setvars/readme&quot;: {
-            &quot;title&quot;: &quot;$:/plugins/tobibeer/setvars/readme&quot;,
-            &quot;text&quot;: &quot;Provides the widget `&lt;$setvars&gt;`...\n\n!!Usage\n\n```\r\n&lt;$setvars\r\n_attr1=&lt;&lt;currentTiddler&gt;&gt;\r\n_attr2={{!!title}}\r\n_attr3=\&quot;1 2 3\&quot;\r\n_attr4=\&quot;[all[current]tagging[]]\&quot;\r\nvar1=\&quot;attr1 \\ = literal = \\ attr2\&quot;\r\nvar2=\&quot;attr3[n] \\ \\ [attr4[1,2][when-empty]] \\ \\ [attr3[][][ - ]]\&quot;\r\nvar3=\&quot;if(attr1 ? [attr4]) || attr3 attr2\&quot;\r\nvar4=\&quot;if(attr1 == attr2 ? attr3[1]) || [attr3[2]]\&quot;&gt;\n\n* &lt;&lt;var1&gt;&gt;\r\n* &lt;&lt;var2&gt;&gt;\r\n* &lt;&lt;var3&gt;&gt;\r\n* &lt;&lt;var4&gt;&gt;\n\n&lt;/$setvars&gt;\r\n```\n\n; documentation / examples / demos...\r\n: http://tobibeer.github.io/tw5-plugins#setvars&quot;
-        },
-        &quot;$:/plugins/tobibeer/setvars/widgets.js&quot;: {
-            &quot;title&quot;: &quot;$:/plugins/tobibeer/setvars/widgets.js&quot;,
-            &quot;text&quot;: &quot;/*\\\r\ntitle: $:/plugins/tobibeer/setvars/widgets.js\r\ntype: application/javascript\r\nmodule-type: widget\r\n\r\nAllows to set multiple variables in one go joining widget attributes:\r\n\r\n@preserve\r\n\\*/\n(function(){\&quot;use strict\&quot;;var e=require(\&quot;$:/core/modules/widgets/widget.js\&quot;).widget;var t=function(t,i){e.call(this);this.initialise(t,i)};t.prototype=Object.create(e.prototype);t.prototype.render=function(e,t){this.parentDomNode=e;this.computeAttributes();this.execute();this.renderChildren(e,t)};t.prototype.execute=function(){var e=this,t=function(t,i,s){var r,n,f=s[3],h=s[4],a=s[5],l=s[6],u=parseInt(f),c=parseInt(h),o=i||f||h;if(i){n=e.wiki.filterTiddlers(t,e)}else{n=f||h?$tw.utils.parseStringArray(t):[t]}r=n.length;if(r&amp;&amp;(f||h)){if(f===\&quot;n\&quot;){u=r}else if(f===\&quot;-n\&quot;){u=1}else if(!f){u=1}if(h===\&quot;n\&quot;){c=r}else if(h===\&quot;-n\&quot;){c=-(u&lt;0?r+u+1:u)}else if(!h){c=1}u=Math.max(1,u&lt;0?r+u+(c&lt;0?c+2:1):c&lt;0?u+c+1:u);c=Math.max(1,Math.abs(c));n=n.splice(u-1,c)}if(!n.length&amp;&amp;a){n.push(a)}return o?l===undefined?$tw.utils.stringifyList(n):n.join(l):n[0]};if(!this.refreshing){this.refreshing=0;this.$={vars:{},attr:{},set:{}};$tw.utils.each(this.attributes,function(t,i){if(i===\&quot;$refresh\&quot;){e.refreshAll=1}else if(i.charAt(0)===\&quot;_\&quot;){e.$.attr[i.substr(1)]=t}else{e.$.vars[i]=t}})}if(this.refreshing&lt;2){$tw.utils.each(e.$.vars,function(i,s){var r,n,f,h,a,l,u=\&quot;\&quot;,c=0,o=0,g=\&quot;\&quot;,p=i,d=[[/^\\s+/,1,function(){return false}],[/^\\\\([^\\\\]*)\\\\/,2,function(e){return e[1]}],[/^(if\\s*\\(|\\(|\\?|\\|\\||\\)|==|!=)/i,0,function(e){var t=e[1];if(t.charAt(t.length-1)===\&quot;(\&quot;){r=1;if(c){o=1}else{f=c=0;h=\&quot;\&quot;;if(t.length===1){f=1}}}else{switch(t){case\&quot;||\&quot;:if(u.length){c=1}break;case\&quot;?\&quot;:if(r&amp;&amp;!o){f=h.length;c=!f;h=\&quot;\&quot;}break;case\&quot;)\&quot;:if(r){if(f){g+=h}r=f=c=0;h=\&quot;\&quot;}o=0;break;case\&quot;==\&quot;:case\&quot;!=\&quot;:if(r){n=t}break}}return false}],[/^(\\[)?(\\w+)(?:\\[(-?\\d*|-?n)(?:,(-?\\d*|-?n))?\\])?(?:\\[([^\\]]*)\\])?(?:\\[([^\\]]*)\\])?(\\])?/,2,function(i){var s=e.$.attr[i[2]];if(s===undefined){s=e.$.set[i[2]]}if(s){if(i[1]&amp;&amp;i[7]){s=t(s,true,i)}else if(!i[1]&amp;&amp;!i[7]){s=t(s,false,i)}else{s=null}}else{s=\&quot;\&quot;}return s}]];while(p.length){l=p;var v=\&quot;\&quot;;$tw.utils.each(d,function(e){var t=e[0].exec(p);if(t){if(!c||!e[1]){v=e[2].call(this,t);if(v===null){v=\&quot;error: missing bracket in setvars\&quot;}else if(typeof v===\&quot;string\&quot;){u=v}}a=e[1]===2;p=p.substr(t[0].length);return false}});if(v){if(r){if(n){u=n===\&quot;==\&quot;&amp;&amp;h===v||n===\&quot;!=\&quot;&amp;&amp;h!==v?\&quot;true\&quot;:\&quot;\&quot;;h=u;n=\&quot;\&quot;}else{h+=v}}else if(!c){g+=v}}if(!r&amp;&amp;a){c=0}if(l===p){g=\&quot;setvars error: invalid syntax\&quot;;p=\&quot;\&quot;}}e.$.set[s]=g;e.setVariable(s,g)})}if(!this.refreshing||this.refreshing===2){this.makeChildWidgets()}};t.prototype.refresh=function(e){var t=0,i,s=this,r=this.computeAttributes();if(Object.keys(r).length){this.refreshSelf();return true}else if(this.refreshAll){i=JSON.parse(JSON.stringify(this.$.set));this.refreshing=1;this.execute();$tw.utils.each(i,function(e,i){if(e!==s.$.set[i]){t=1;return false}});if(t){this.refreshing=2;this.refreshSelf();return true}this.refreshing=0}return this.refreshChildren(e)};exports.setvars=t})();&quot;,
-            &quot;type&quot;: &quot;application/javascript&quot;,
-            &quot;module-type&quot;: &quot;widget&quot;
-        }
-    }
-}</pre>
-</div>
 <div created="20181030235109749" creator="Zerothlaw" modified="20181030235109749" modifier="Zerothlaw" storyleft="0px" storyright="770px" title="$:/plugins/TWaddle/LeftBar/temp">
 <pre></pre>
 </div>
@@ -14682,8 +14666,8 @@ You can switch between viewing the gallery as a list of images or as one image a
 <div created="20181022141921947" creator="Zerothlaw" modified="20181029214352861" modifier="Zerothlaw" title="$:/SiteTitle">
 <pre>Alendi</pre>
 </div>
-<div created="20200826104733285" creator="Zerothlaw" modified="20201106011456379" modifier="Zerothlaw" title="$:/state/HideTags">
-<pre>hide</pre>
+<div created="20200826104733285" creator="Zerothlaw" modified="20201106011518018" modifier="Zerothlaw" title="$:/state/HideTags">
+<pre>show</pre>
 </div>
 <div created="20200827225524057" creator="Zerothlaw" modified="20201106011456378" modifier="Zerothlaw" title="$:/state/HideText">
 <pre>hide</pre>
@@ -14703,8 +14687,8 @@ You can switch between viewing the gallery as a list of images or as one image a
 <div created="20200913203939705" creator="Zerothlaw" modified="20201102001514378" modifier="Zerothlaw" title="$:/state/tab--1498284803">
 <pre>$:/core/ui/AdvancedSearch/System</pre>
 </div>
-<div created="20200531112943862" creator="Zerothlaw" modified="20200531112943862" modifier="Zerothlaw" title="$:/state/tab-1749438307">
-<pre>$:/core/ui/ControlPanel/Saving</pre>
+<div created="20200531112943862" creator="Zerothlaw" modified="20201106012630923" modifier="Zerothlaw" title="$:/state/tab-1749438307">
+<pre>$:/core/ui/ControlPanel/Plugins</pre>
 </div>
 <div created="20200531112945502" creator="Zerothlaw" modified="20201029093314952" modifier="Zerothlaw" title="$:/state/tab-2065006209">
 <pre>$:/core/ui/ControlPanel/Saving/GitHub</pre>
@@ -14719,12 +14703,12 @@ You can switch between viewing the gallery as a list of images or as one image a
 <pre>El bosque de Lockeborg - El Ocaso</pre>
 </div>
 <div title="$:/status/RequireReloadDueToPluginChange">
-<pre>no</pre>
+<pre>yes</pre>
 </div>
 <div created="20181022143852750" creator="Z" modified="20181022143854994" modifier="Zerothla" title="$:/status/UserName">
 <pre>Zerothlaw</pre>
 </div>
-<div created="20201106011159194" creator="Zerothlaw" list="Bienvenidos" modified="20201106011241235" modifier="Zerothlaw" title="$:/StoryList">
+<div created="20201106011159194" creator="Zerothlaw" list="$:/ControlPanel [[Draft of 'El Férreo puño de la Razón' by Zerothlaw]] Bienvenidos" modified="20201106012645771" modifier="Zerothlaw" title="$:/StoryList">
 <pre></pre>
 </div>
 <div caption="{{$:/language/TagManager/Caption}}" color="#bbb" created="20181024153124086" creator="Zerothlaw" icon="$:/core/images/tag-button" modified="20191009110420684" modifier="Zerothlaw" title="$:/TagManager">
@@ -18923,6 +18907,14 @@ Dorian es un hombre severo, pero amable, que cumple a la perfección con la imag
 Uno de los mayores eruditos del último siglo, Dorian siempre busca nuevos talentos para el Círculo, y fueron su paciencia y métodos, además de su poder, los que le dieron el título de Archimago. Tiene acceso a libros y tratados de [[Magia]] con los que otros sueñan, y aunque no participa en todo de primera mano por falta de tiempo, se mantiene al corriente de todas las investigaciones realizadas por el [[Círculo|El Círculo de la Alta Magia]]  fin de determinar cuales son dignas de seguir recibiendo fondos por su calidad y prospectivos resultados.
 
 !!''Relaciones''</pre>
+</div>
+<div created="20181104010758182" creator="Zerothlaw" draft.of="El Férreo puño de la Razón" draft.title="El Férreo puño de la Razón" list="" modified="20201106012547187" modifier="Zerothlaw" tags="[[Los Encadenados]] Spoiler Aspectos Finalizado" title="Draft of 'El Férreo puño de la Razón' by Zerothlaw" tmap.id="4c3bf48d-88c4-4486-b5e2-a45e65cd3b65">
+<pre>[[Los Encadenados]] son el brazo armado del [[Culto al Alba|El Culto al Alba]], un ejército de fanáticos y zelotes enmascarados, entrenados hasta la extenuación para ser capaces de encontrar, cazar y exterminar a todas las criaturas mágicas. 
+
+Este [[Aspecto|Aspectos]] simboliza el entrenamiento y la dedicación de los Encadenados a su causa, así como su fanática lealtad.
+
+&lt;&lt;list-links &quot;[kin&lt;&lt;currentTiddler&gt;&gt;]&quot;&gt;&gt;
+</pre>
 </div>
 <div created="20181105004714396" creator="Zerothlaw" modified="20181112150355758" modifier="Zerothlaw" tags="[[Criaturas de Magia]]" title="Dragón" tmap.id="344416b7-36b5-4ec4-9822-1ea9da26daf4">
 <pre></pre>
